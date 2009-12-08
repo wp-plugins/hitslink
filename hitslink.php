@@ -2,7 +2,7 @@
 /*
 Plugin Name: HitsLink
 Description: HitsLink - Website Statistics, web analytics, hit counter
-Version: 1.0
+Version: 1.1
 Plugin URI: http://blog.sjinks.pro/wordpress/plugins/360-hitslink-for-wordpress/
 Author: Vladimir Kolesnikov
 Author URI: http://blog.sjinks.pro/
@@ -48,7 +48,7 @@ Author URI: http://blog.sjinks.pro/
                         add_action('wp_head', array($this, 'wp_head'), 999);
                     }
                     else {
-                        add_action('admin_head', array($this, 'wp_head'), 999);
+                        add_action('admin_menu', array($this, 'amin_menu'));
                     }
                 }
             }
@@ -57,6 +57,11 @@ Author URI: http://blog.sjinks.pro/
         public function admin_init()
         {
             add_action('admin_post_update_hitslink_settings', array(&$this, 'update_hitslink_settings'));
+            add_action('admin_head', array($this, 'wp_head'), 999);
+        }
+
+        public function admin_menu()
+        {
             add_options_page('HitsLink Options', 'HitsLink', 'manage_options', 'hitslink/options-hitslink.php');
         }
 
